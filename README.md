@@ -1,4 +1,13 @@
-# image-template
+# swayzzite base image
+
+# Testing the image
+
+```shell
+toolbox create
+toolbox enter
+```
+
+# Original Documentation
 
 This repository is meant to be a template for building your own custom [bootc](https://github.com/bootc-dev/bootc) image. This template is the recommended way to make customizations to any image published by the Universal Blue Project.
 
