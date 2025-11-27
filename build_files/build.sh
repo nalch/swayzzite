@@ -13,6 +13,7 @@ set -ouex pipefail
 dnf5 install -y gh htop zsh sway waybar swaylock
 
 # Use a COPR Example:
+. /etc/release
 curl -fsSL "https://copr.fedorainfracloud.org/coprs/scottames/ghostty/repo/fedora-${VERSION_ID}/scottames-ghostty-fedora-${VERSION_ID}.repo" | sudo tee /etc/yum.repos.d/_copr:copr.fedorainfracloud.org:scottames:ghostty.repo > /dev/null
 dnf5 -y copr enable ublue-os/staging
 
