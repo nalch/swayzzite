@@ -17,8 +17,6 @@ dnf5 install -y gh htop zsh sway waybar swaylock gcc ansible
 # Disable COPRs so they don't end up enabled on the final image:
 # dnf5 -y copr disable ublue-os/staging
 
-curl -LsSf https://astral.sh/uv/install.sh | sh
-
 cp /01-nalch.just /usr/share/ublue-os/just/
 
 #### Example for enabling a System Unit File
