@@ -36,29 +36,37 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     /ctx/build.sh
 
 # homebrew
-config=$'\
-type: brew \n\
-nofile-limits: true # increase nofile limits \n\
-brew-analytics: false # disable telemetry \n\
-' && \
-/tmp/scripts/run_module.sh "$(echo "$config" | yq eval '.type')" "$(echo "$config" | yq eval -o=j -I=0)"
+RUN \
+  --mount=type=bind,from=ghcr.io/blue-build/modules:latest,src=/modules,dst=/tmp/modules,rw \
+  --mount=type=bind,from=ghcr.io/blue-build/cli/build-scripts:latest,src=/scripts/,dst=/tmp/scripts/ \
+  # run the module
+  config=$'\
+  type: brew \n\
+  nofile-limits: true # increase nofile limits \n\
+  brew-analytics: false # disable telemetry \n\
+  ' && \
+  /tmp/scripts/run_module.sh "$(echo "$config" | yq eval '.type')" "$(echo "$config" | yq eval -o=j -I=0)"
 
 # fonts
-config=$'\
-type: fonts \n\
-fonts: \n\
-  nerd-fonts: \n\
-    - Hack \n\
-    - SourceCodePro \n\
-    - Terminus \n\
-    - JetBrainsMono \n\
-    - NerdFontsSymbolsOnly \n\
-  google-fonts: \n\
-    - Roboto \n\
-    - Open Sans \n\
-    - Inter \n\
-' && \
-/tmp/scripts/run_module.sh "$(echo "$config" | yq eval '.type')" "$(echo "$config" | yq eval -o=j -I=0)"
+RUN \
+  --mount=type=bind,from=ghcr.io/blue-build/modules:latest,src=/modules,dst=/tmp/modules,rw \
+  --mount=type=bind,from=ghcr.io/blue-build/cli/build-scripts:latest,src=/scripts/,dst=/tmp/scripts/ \
+  # run the module
+  config=$'\
+  type: fonts \n\
+  fonts: \n\
+    nerd-fonts: \n\
+      - Hack \n\
+      - SourceCodePro \n\
+      - Terminus \n\
+      - JetBrainsMono \n\
+      - NerdFontsSymbolsOnly \n\
+    google-fonts: \n\
+      - Roboto \n\
+      - Open Sans \n\
+      - Inter \n\
+  ' && \
+  /tmp/scripts/run_module.sh "$(echo "$config" | yq eval '.type')" "$(echo "$config" | yq eval -o=j -I=0)"
 
 ### LINTING
 ## Verify final image and contents are correct.
