@@ -35,6 +35,16 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=tmpfs,dst=/tmp \
     /ctx/build.sh
 
+# Run BlueBuild's gnome-extensions module
+COPY files/justfiles /tmp/files/justfiles
+RUN \
+  # add in the module source code
+  --mount=type=bind,from=ghcr.io/blue-build/modules:latest,src=/modules,dst=/tmp/modules,rw \
+  # add in the script that sets up the module run environment
+  --mount=type=bind,from=ghcr.io/blue-build/cli/build-scripts:latest,src=/scripts/,dst=/tmp/scripts/ \
+  # run the module
+  /tmp/scripts/run_module.sh 'justfiles'
+
 ### LINTING
 ## Verify final image and contents are correct.
 RUN bootc container lint
