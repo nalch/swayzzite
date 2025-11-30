@@ -75,6 +75,7 @@ RUN \
   # run the module
   config=$'\
   type: chezmoi \n\
+  disable-unit: true \n\
   all-users: false # make users have to enable chezmoi manually \n\
   ' && \
   /tmp/scripts/run_module.sh "$(echo "$config" | yq eval '.type')" "$(echo "$config" | yq eval -o=j -I=0)"
