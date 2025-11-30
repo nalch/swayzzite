@@ -87,7 +87,7 @@ RUN \
   --mount=type=bind,from=ghcr.io/blue-build/cli/build-scripts:latest,src=/scripts/,dst=/tmp/scripts/ \
   # run the module
   config=$'\
-  type: justfiles
+  type: justfiles \n\
   ' && \
   /tmp/scripts/run_module.sh "$(echo "$config" | yq eval '.type')" "$(echo "$config" | yq eval -o=j -I=0)"
 
