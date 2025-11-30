@@ -82,14 +82,14 @@ RUN \
 
 # justfiles
 COPY files/justfiles /tmp/files/justfiles
-RUN \
-  --mount=type=bind,from=ghcr.io/blue-build/modules:latest,src=/modules,dst=/tmp/modules,rw \
-  --mount=type=bind,from=ghcr.io/blue-build/cli/build-scripts:latest,src=/scripts/,dst=/tmp/scripts/ \
-  # run the module
-  config=$'\
-  type: justfiles \n\
-  ' && \
-  /tmp/scripts/run_module.sh "$(echo "$config" | yq eval '.type')" "$(echo "$config" | yq eval -o=j -I=0)"
+#RUN \
+#  --mount=type=bind,from=ghcr.io/blue-build/modules:latest,src=/modules,dst=/tmp/modules,rw \
+#  --mount=type=bind,from=ghcr.io/blue-build/cli/build-scripts:latest,src=/scripts/,dst=/tmp/scripts/ \
+#  # run the module
+#  config=$'\
+#  type: justfiles \n\
+#  ' && \
+#  /tmp/scripts/run_module.sh "$(echo "$config" | yq eval '.type')" "$(echo "$config" | yq eval -o=j -I=0)"
 
 
 ### LINTING
