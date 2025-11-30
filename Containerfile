@@ -68,6 +68,30 @@ RUN \
   ' && \
   /tmp/scripts/run_module.sh "$(echo "$config" | yq eval '.type')" "$(echo "$config" | yq eval -o=j -I=0)"
 
+# chezmoi for dotfiles
+#RUN \
+#  --mount=type=bind,from=ghcr.io/blue-build/modules:latest,src=/modules,dst=/tmp/modules,rw \
+#  --mount=type=bind,from=ghcr.io/blue-build/cli/build-scripts:latest,src=/scripts/,dst=/tmp/scripts/ \
+#  # run the module
+#  config=$'\
+#  type: chezmoi \n\
+#  repository: "https://github.com/nalch/dotfiles" # my dotfiles repo \n\
+#  all-users: false # make users have to enable chezmoi manually \n\
+#  ' && \
+#  /tmp/scripts/run_module.sh "$(echo "$config" | yq eval '.type')" "$(echo "$config" | yq eval -o=j -I=0)"
+
+# justfiles
+COPY files/justfiles /tmp/files/justfiles
+RUN \
+  --mount=type=bind,from=ghcr.io/blue-build/modules:latest,src=/modules,dst=/tmp/modules,rw \
+  --mount=type=bind,from=ghcr.io/blue-build/cli/build-scripts:latest,src=/scripts/,dst=/tmp/scripts/ \
+  # run the module
+  config=$'\
+  type: justfiles
+  ' && \
+  /tmp/scripts/run_module.sh "$(echo "$config" | yq eval '.type')" "$(echo "$config" | yq eval -o=j -I=0)"
+
+
 ### LINTING
 ## Verify final image and contents are correct.
 RUN bootc container lint
