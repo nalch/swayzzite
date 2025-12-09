@@ -77,7 +77,8 @@ RUN \
   # run the module
   config=$'\
   type: chezmoi \n\
-  disable-init: true \n\
+  repository: https://github.com/nalch/dotfiles \n\
+  disable-init: false \n\
   disable-update: true \n\
   all-users: false # make users have to enable chezmoi manually \n\
   ' && \
