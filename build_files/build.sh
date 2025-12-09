@@ -20,8 +20,6 @@ dnf5 install -y gh htop zsh sway waybar swaylock gcc ansible yq jq
 dnf5 -y copr enable scottames/ghostty
 dnf5 -y install ghostty
 
-# cp /ctx/01-nalch.just /usr/share/ublue-os/just/
-
 #### Example for enabling a System Unit File
 
 systemctl enable podman.socket
