@@ -24,6 +24,8 @@ dnf5 -y install ghostty
 #dnf5 -y install ./protonvpn-stable-release-1.0.3-1.noarch.rpm && dnf5 -y check-update --refresh
 # dnf5 -y install proton-vpn-gnome-desktop
 
+ls -laisht /ctx
+
 #### Example for enabling a System Unit File
 
 systemctl enable podman.socket
