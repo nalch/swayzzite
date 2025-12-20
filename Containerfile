@@ -94,6 +94,20 @@ RUN \
   ' && \
   /tmp/scripts/run_module.sh "$(echo "$config" | yq eval '.type')" "$(echo "$config" | yq eval -o=j -I=0)"
 
+# static files
+RUN \
+  --mount=type=bind,from=ctx,source=/,target=/ctx \
+  --mount=type=bind,from=ghcr.io/blue-build/modules:latest,src=/modules,dst=/tmp/modules,rw \
+  --mount=type=bind,from=ghcr.io/blue-build/cli/build-scripts:latest,src=/scripts/,dst=/tmp/scripts/ \
+  # run the module
+  config=$'\
+  type: files \n\
+  files: \n\
+    - source: shared \n\
+      destination: /usr/share/swayzzite \n\
+  ' && \
+  /tmp/scripts/run_module.sh "$(echo "$config" | yq eval '.type')" "$(echo "$config" | yq eval -o=j -I=0)"
+
 #
 ### LINTING
 ## Verify final image and contents are correct.
