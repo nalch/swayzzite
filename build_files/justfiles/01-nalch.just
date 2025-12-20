@@ -16,6 +16,12 @@ ssh:
   touch ~/.ssh/config
   chmod 600 ~/.ssh/config
 
+# update the config files
+[group('nalch')]
+dotfiles:
+  #!/usr/bin/env bash
+  chezmoi update
+
 # update the os and reboot
 [group('nalch')]
 update:
