@@ -95,7 +95,7 @@ RUN \
   /tmp/scripts/run_module.sh "$(echo "$config" | yq eval '.type')" "$(echo "$config" | yq eval -o=j -I=0)"
 
 # static files
-ENV FILES_DIRECTORY=/ctx
+ENV FILES_DIR=/ctx
 RUN \
   --mount=type=bind,from=ctx,source=/,target=/ctx \
   --mount=type=bind,from=ghcr.io/blue-build/modules:latest,src=/modules,dst=/tmp/modules,rw \
