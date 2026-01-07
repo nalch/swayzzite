@@ -10,7 +10,7 @@ set -ouex pipefail
 # https://mirrors.rpmfusion.org/mirrorlist?path=free/fedora/updates/39/x86_64/repoview/index.html&protocol=https&redirect=1
 
 # this installs a package from fedora repos
-dnf5 install -y gh htop zsh sway waybar swaylock gcc ansible yq jq rofi pavucontrol rustc cargo util-linux neovim xclip xkill maim mako xdg-desktop-portal xdg-desktop-portal-wlr mkcert
+dnf5 install -y gh htop zsh sway waybar swaylock gcc ansible yq jq rofi pavucontrol rustc cargo util-linux neovim xclip xkill grim maim grimshot slurp mako xdg-desktop-portal xdg-desktop-portal-wlr mkcert gimp
 
 # Use a COPR Example:
 # dnf5 -y copr enable ublue-os/staging
