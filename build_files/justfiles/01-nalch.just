@@ -26,4 +26,5 @@ dotfiles:
 [group('nalch')]
 update:
   #!/usr/bin/env bash
+  sudo rpm-ostree reset
   sudo bootc upgrade --apply
