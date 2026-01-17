@@ -17,7 +17,6 @@ env:
   IMAGE_DESC: "Swayzzite"
   IMAGE_KEYWORDS: "bootc,ublue,universal-blue,bazzite,sway"
   IMAGE_LOGO_URL: "https://avatars.githubusercontent.com/u/120078124?s=200&v=4"  # Put your own image here for a fancy profile on https://artifacthub.io/!
-  IMAGE_NAME: "${{ github.event.repository.name }}"  # output image name, usually same as repo name
   IMAGE_REGISTRY: "ghcr.io/${{ github.repository_owner }}"  # do not edit
   DEFAULT_TAG: "latest"
 
@@ -35,12 +34,16 @@ jobs:
       packages: write
       id-token: write
 
+    strategy:
+      matrix:
+        variant: [${{ github.event.repository.name }}, ${{ github.event.repository.name }}-dev]
+
     steps:
       - name: Prepare environment
         run: |
           # Lowercase the image uri
           echo "IMAGE_REGISTRY=${IMAGE_REGISTRY,,}" >> ${GITHUB_ENV}
-          echo "IMAGE_NAME=${IMAGE_NAME,,}" >> ${GITHUB_ENV}
+          echo "IMAGE_NAME=${{ matrix.variant }}" >> ${GITHUB_ENV}
 
       # These stage versions are pinned by https://github.com/renovatebot/renovate
       - name: Checkout

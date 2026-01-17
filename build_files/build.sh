@@ -2,6 +2,10 @@
 
 set -ouex pipefail
 
+### Print Variant
+
+echo "Image Variant: $1"
+
 ### Install packages
 
 # Packages can be installed from any enabled yum repo on the image.
@@ -23,3 +27,10 @@ dnf5 -y install ghostty
 #### Example for enabling a System Unit File
 
 systemctl enable podman.socket
+
+### Variant specific commands
+
+if [ "$1" = "swayzzite-dev" ]; then
+  echo "Building swayzzite-dev specific variant"
+  dnf5 install -y java-latest-openjdk 
+fi
