@@ -36,7 +36,7 @@ jobs:
 
     strategy:
       matrix:
-        variant: [${{ github.event.repository.name }}, ${{ github.event.repository.name }}-dev]
+        variant: ["${{ github.event.repository.name }}", "${{ github.event.repository.name }}-dev"]
 
     steps:
       - name: Prepare environment
