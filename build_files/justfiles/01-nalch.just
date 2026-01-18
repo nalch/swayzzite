@@ -28,3 +28,8 @@ update:
   #!/usr/bin/env bash
   sudo rpm-ostree reset
   sudo bootc upgrade --apply
+
+[group('nalch')]
+flatpaks:
+  #!/usr/bin/env bash
+  flatpak install flathub --user org.mozilla.firefox
